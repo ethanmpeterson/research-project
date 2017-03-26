@@ -40,7 +40,12 @@ graphVel = gcurve(gdisplay = graphY, color = color.green) # velocity will appear
 graphAcc = gcurve(gdisplay = graphY, color = color.red) # acceleration will appear in red
 
 # setup window for live data and additional information
+dataWindow = display(x=0, y = 600, width = 1100, height = 150,
+                     box = 0, background = color.white, foreground = color.black)
 
+timeLabel = label(yoffset = 15, line = 0) # label shows the time the ball has been falling as the simulation runs
+vLabel = label() # label shows the changing velocity of ball as the simulation runs
+pLabel = label(yoffset = -15, line = 0) # shows changing position as the simulation runs
 # simulation loop
 
 while ball.pos.y >= 0:
@@ -62,6 +67,11 @@ while ball.pos.y >= 0:
     graphPos.plot(pos = (t, ball.pos.y))
     graphVel.plot(pos = (t, ballVel.y))
     graphAcc.plot(pos = (t, gravity.y))
+
+    # update data window
+    timeLabel.text = "Time: " + str(t) + " s"
+    vLabel.text = "Velocity: " + str(ballVel.y) + " m/s"
+    pLabel.text = "Position: " + str(ball.pos.y) + " m"
 
     # increment the time
     t += dt
