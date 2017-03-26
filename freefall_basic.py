@@ -1,5 +1,6 @@
 # Ethan Peterson
-# Basic freefall simulation where friction / air resistance is ignored
+# Basic free fall simulation where friction / air resistance is ignored
+# it is assumed the ball is falling in vacuum
 
 from visual import *
 from visual.graph import *
@@ -69,7 +70,7 @@ while ball.pos.y >= 0:
 
     # Update vector arrows surrounding the ball
     vArrow.pos = ball.pos + (12, 0, 0) # offset position of the arrows so they do not appear inside the ball and on top of each other
-    vArrow.axis = 2 * ballVel
+    vArrow.axis = 2 * ballVel # multiply velocity by 2 to make vector arrow more visible and larger
     aArrow.pos = ball.pos + (-12, 0, 0) # ^
     aArrow.axis = gravity * 2 # multiply by 2 to make acceleration arrow more visible since it remanins constant
 
