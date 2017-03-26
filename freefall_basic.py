@@ -42,12 +42,19 @@ graphAcc = gcurve(gdisplay = graphY, color = color.red)
 # simulation loop
 
 while ball.pos.y >= 0:
-    rate(100)
+    rate(100) # set loop to run 100 times a second
+
+    ball.pos += ballVel * dt # just in case the user defined an initial velocity at the top of file or else this will increment by 0 doing nothing
 
     # calulcate ball velocity
     ballVel = ballVel + gravity * dt # Same as formula: v2 = v1 + a * dt
     ball.pos += ballVel * dt # update balls position using the velocity value calculated above
 
+    # Update vector arrows surrounding the ball
+    vArrow.pos = ball.pos + (12, 0, 0) # offset position of the arrows so they do not appear inside the ball and on top of each other
+    vArrow.axis = 2 * ballVel
+    aArrow.pos = ball.pos + (-12, 0, 0) # ^
+    aArrow.axis = gravity * 2 # multiply by 2 to make acceleration arrow more visible since it remanins constant
 
-
-
+    # increment the time
+    t += dt
