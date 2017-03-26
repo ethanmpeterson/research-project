@@ -35,9 +35,9 @@ graphY = gdisplay(x=500, y=0, width=600, height=600,
             xtitle='Time (seconds)', ytitle='Magnitude',
             foreground=color.black, background=color.white)
 
-graphPos = gcurve(gdisplay = graphY, color = color.yellow)
-graphVel = gcurve(gdisplay = graphY, color = color.green)
-graphAcc = gcurve(gdisplay = graphY, color = color.red)
+graphPos = gcurve(gdisplay = graphY, color = color.blue) # position will appear in blue on the graph
+graphVel = gcurve(gdisplay = graphY, color = color.green) # velocity will appear in green
+graphAcc = gcurve(gdisplay = graphY, color = color.red) # acceleration will appear in red
 
 # simulation loop
 
@@ -55,6 +55,11 @@ while ball.pos.y >= 0:
     vArrow.axis = 2 * ballVel
     aArrow.pos = ball.pos + (-12, 0, 0) # ^
     aArrow.axis = gravity * 2 # multiply by 2 to make acceleration arrow more visible since it remanins constant
+
+    # Update Graphs
+    graphPos.plot(pos = (t, ball.pos.y))
+    graphVel.plot(pos = (t, ballVel.y))
+    graphAcc.plot(pos = (t, gravity.y))
 
     # increment the time
     t += dt
