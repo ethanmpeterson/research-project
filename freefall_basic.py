@@ -6,8 +6,8 @@ from visual.graph import *
 
 
 # Modify these variables to change properties of the simulation
-            # -9.8 m/s/s
-gravity = vector(0, -9.8, 0) # vector objects provide some extra functionality that is useful for physics simulations.
+                 # x, y, z
+gravity = vector(0, -9.8, 0) # vector objects provide some extra functionality that is useful for physics simulations. (m/s/s)
 # See Documentation: http://vpython.org/contents/docs/vector.html
 
 groundStartPos = vector(0, -10, 0) # starting position of the ground onscreen (in metres)
@@ -30,7 +30,7 @@ vArrow = arrow(pos=ball.pos, axis=ballVel, color=color.green)
 aArrow = arrow(pos=ball.pos, axis=gravity, color=color.red)
 
 #Setup the graph
-graphY = gdisplay(x=500, y=0, width=600, height=600,
+graphY = gdisplay(x=500, y=0, width=600, height=600, # setup graph display
             title='Vertical Position(m), Velocity(m/s), and Acceleration(m/s^2)',
             xtitle='Time (seconds)', ytitle='Magnitude',
             foreground=color.black, background=color.white)
@@ -38,6 +38,8 @@ graphY = gdisplay(x=500, y=0, width=600, height=600,
 graphPos = gcurve(gdisplay = graphY, color = color.blue) # position will appear in blue on the graph
 graphVel = gcurve(gdisplay = graphY, color = color.green) # velocity will appear in green
 graphAcc = gcurve(gdisplay = graphY, color = color.red) # acceleration will appear in red
+
+# setup window for live data and additional information
 
 # simulation loop
 
