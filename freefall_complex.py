@@ -75,7 +75,7 @@ while ball.pos.y >= 0:
     # Update Graphs
     graphPos.plot(pos = (t, ball.pos.y))
     graphVel.plot(pos = (t, ballVel.y))
-    graphAcc.plot(pos = (t, gravity.y))
+    graphAcc.plot(pos = (t, ballNetForce.y / ballMass))
 
     # # update data window
     liveMotionData.text = 'Velocity: ' + str(ballVel.y) + ' m/s \n' # gives ball's real time velocity
