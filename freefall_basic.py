@@ -32,7 +32,7 @@ aArrow = arrow(pos=ball.pos, axis=gravity, color=color.red)
 
 #Setup the graph
 graphY = gdisplay(x=500, y=0, width=600, height=600, # setup graph display
-            title='Vertical Position(m), Velocity(m/s), and Acceleration(m/s^2)',
+            title='Vertical Position(m), Velocity(m/s), and Acceleration(m/s/s)',
             xtitle='Time (seconds)', ytitle='Magnitude',
             foreground=color.black, background=color.white)
 

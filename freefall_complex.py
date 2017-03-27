@@ -37,7 +37,7 @@ aArrow = arrow(pos=ball.pos, axis=gravity, color=color.red)
 
 #Setup the graph
 graphY = gdisplay(x=500, y=0, width=600, height=600, # setup graph display
-            title='Vertical Position(m), Velocity(m/s), and Acceleration(m/s^2)',
+            title='Vertical Position(m), Velocity(m/s), and Acceleration(m/s/s)',
             xtitle='Time (seconds)', ytitle='Magnitude',
             foreground=color.black, background=color.white)
 
@@ -49,19 +49,21 @@ graphAcc = gcurve(gdisplay = graphY, color = color.red) # acceleration will appe
 dataWindow = display(x=0, y = 600, width = 1100, height = 150,
                      box = 0, background = color.white, foreground = color.black)
 
-timeLabel = label(yoffset = 15, line = 0) # label shows the time the ball has been falling as the simulation runs
-vLabel = label() # label shows the changing velocity of ball as the simulation runs
-pLabel = label(yoffset = -15, line = 0) # shows changing position as the simulation runs
+liveMotionData = label(yoffset = 15, xoffset = -110, line = 0)
 
-vILabel = label(xoffset = -110, yoffset = 15, line = 0) # shows initial velocity
-vILabel.text = "Initial Velocity: " + str(ballVel.y) + " m/s"
-vFLabel = label(xoffset = -110, yoffset = -15, line = 0) # shows final velocity before the ball hits the ground
-vFLabel.text = "Final Velocity:" # final velocity value is added when ball hits the ground after loop finishes
-
-pILabel = label(xoffset = 110, yoffset = 15, line = 0)
-pILabel.text = "Initial Position: " + str(ballStartPos.y) + " m"
-pFLabel = label(xoffset = 110, yoffset = -15, line = 0)
-pFLabel.text = "Final Position:" # final position will be added after the loop finishes
+# timeLabel = label(yoffset = 15, line = 0) # label shows the time the ball has been falling as the simulation runs
+# vLabel = label() # label shows the changing velocity of ball as the simulation runs
+# pLabel = label(yoffset = -15, line = 0) # shows changing position as the simulation runs
+#
+# vILabel = label(xoffset = -110, yoffset = 15, line = 0) # shows initial velocity
+# vILabel.text = "Initial Velocity: " + str(ballVel.y) + " m/s"
+# vFLabel = label(xoffset = -110, yoffset = -15, line = 0) # shows final velocity before the ball hits the ground
+# vFLabel.text = "Final Velocity:" # final velocity value is added when ball hits the ground after loop finishes
+#
+# pILabel = label(xoffset = 110, yoffset = 15, line = 0)
+# pILabel.text = "Initial Position: " + str(ballStartPos.y) + " m"
+# pFLabel = label(xoffset = 110, yoffset = -15, line = 0)
+# pFLabel.text = "Final Position:" # final position will be added after the loop finishes
 
 # simulation loop
 
@@ -88,13 +90,17 @@ while ball.pos.y >= 0:
     graphVel.plot(pos = (t, ballVel.y))
     graphAcc.plot(pos = (t, gravity.y))
 
-    # update data window
-    timeLabel.text = "Time: " + str(t) + " s"
-    vLabel.text = "Velocity: " + str(ballVel.y) + " m/s"
-    pLabel.text = "Position: " + str(ball.pos.y) + " m"
+    # # update data window
+    liveMotionData.text = 'Velocity: ' + str(ballVel.y) + ' m/s \n' # gives ball's real time velocity
+    liveMotionData.text += 'Position: ' + str(ball.pos.y) + ' m \n' # gives ball's current y pos
+    liveMotionData.text += 'Acceleration: ' + str(ballNetForce.y / ballMass) + ' m/s/s'
+
+    # timeLabel.text = "Time: " + str(t) + " s"
+    # vLabel.text = "Velocity: " + str(ballVel.y) + " m/s"
+    # pLabel.text = "Position: " + str(ball.pos.y) + " m"
 
     # increment the time
     t += dt
 
-vFLabel.text = "Final Velocity: " + str(ballVel.y) + " m/s"
-pFLabel.text = "Final Position: " + str(ball.pos.y) + " m"
+# vFLabel.text = "Final Velocity: " + str(ballVel.y) + " m/s"
+# pFLabel.text = "Final Position: " + str(ball.pos.y) + " m"
