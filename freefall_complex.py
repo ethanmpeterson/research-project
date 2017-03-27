@@ -50,6 +50,7 @@ dataWindow = display(x=0, y = 600, width = 1100, height = 150,
                      box = 0, background = color.white, foreground = color.black)
 
 liveMotionData = label(yoffset = 15, xoffset = -110, line = 0)
+liveForceData = label(yoffset = 15, xoffset = 110, line = 0)
 
 # simulation loop
 
@@ -80,6 +81,9 @@ while ball.pos.y >= 0:
     liveMotionData.text = 'Velocity: ' + str(ballVel.y) + ' m/s \n' # gives ball's real time velocity
     liveMotionData.text += 'Position: ' + str(ball.pos.y) + ' m \n' # gives ball's current y pos
     liveMotionData.text += 'Acceleration: ' + str(ballNetForce.y / ballMass) + ' m/s/s'
+
+    liveForceData.text = 'Net Force: ' + str(ballNetForce) + ' N \n'
+    liveForceData.text += 'Drag Force: ' + str(ballDrag) + ' N'
 
     # increment the time
     t += dt
