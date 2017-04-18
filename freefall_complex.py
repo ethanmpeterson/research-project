@@ -77,7 +77,7 @@ while ball.pos.y >= 0:
     graphVel.plot(pos = (t, ballVel.y))
     graphAcc.plot(pos = (t, ballNetForce.y / ballMass))
 
-    # # update data window
+    # update data window
     liveMotionData.text = 'Velocity: ' + str(ballVel.y) + ' m/s \n' # gives ball's real time velocity
     liveMotionData.text += 'Position: ' + str(ball.pos.y) + ' m \n' # gives ball's current y pos
     liveMotionData.text += 'Acceleration: ' + str(ballNetForce.y / ballMass) + ' m/s/s'
