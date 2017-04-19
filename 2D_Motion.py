@@ -12,8 +12,8 @@ gravity = vector(0, -9.8, 0) # vector objects provide some extra functionality t
 # See Documentation: http://vpython.org/contents/docs/vector.html
 
 groundStartPos = vector(0, -10, 0) # starting position of the ground onscreen (in metres)
-ballStartPos = vector(0, 300, 0) # starting position of the ball which will be in freefall (in metres)
-ballVel = vector(0, 0, 0) # starting velocity of the ball in m/s
+ballStartPos = vector(-450, 300, 0) # starting position of the ball which will be in freefall (in metres)
+ballVel = vector(100, 0, 0) # starting velocity of the ball in m/s
 ballMass = 5 # the ball's mass in kg
 ballDragCoeff = 1.2 # drag coefficient of the ball
 ballNetForce = vector(0, 0, 0) # holds the net force of the ball
@@ -59,8 +59,8 @@ while ball.pos.y >= 0:
 
     # Calculate ball's drag and net froces
     ballDrag = - ballDragCoeff * ballVel
-    ballNetForce = ballMass * gravity + ballDrag
-
+    ballNetForce.y = ballMass * gravity.y + ballDrag.y
+    print ballVel.x
 
     # calulcate ball velocity
     ballVel += ballNetForce * dt / ballMass
