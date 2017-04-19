@@ -18,7 +18,7 @@ ballVel = vector(0, 0, 0) # starting velocity of the ball in m/s
 # Time Related Constant Variables
 
 t = 0 # logs the total time the fall takes in seconds
-dt = 0.001 # deltaT variable used for calculations as it will be the difference in time between each time the loop runs
+dt = 0.01 # deltaT variable used for calculations as it will be the difference in time between each time the loop runs
 
 # Set up visuals
 
@@ -60,7 +60,7 @@ pFLabel.text = "Final Position:" # final position will be added after the loop f
 # simulation loop
 
 while ball.pos.y >= 0:
-    rate(1000) # set loop to run 100 times a second
+    rate(100) # set loop to run 100 times a second
 
     ball.pos += ballVel * dt # just in case the user defined an initial velocity at the top of file or else this will increment by 0 doing nothing
 

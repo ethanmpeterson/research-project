@@ -1,6 +1,5 @@
 # Ethan Peterson
-# Basic free fall simulation where friction / air resistance is ignored
-# it is assumed the ball is falling in vacuum
+# Complex free fall simulation where friction / air resistance is included
 
 from visual import *
 from visual.graph import *
