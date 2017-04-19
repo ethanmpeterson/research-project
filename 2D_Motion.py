@@ -1,10 +1,8 @@
 # Ethan Peterson
-# Basic free fall simulation where friction / air resistance is ignored
-# it is assumed the ball is falling in vacuum
 
+# VPython Imports
 from visual import *
 from visual.graph import *
-
 
 # Modify these variables to change properties of the simulation:
                  # x, y, z
@@ -13,7 +11,7 @@ gravity = vector(0, -9.8, 0) # vector objects provide some extra functionality t
 
 groundStartPos = vector(0, -10, 0) # starting position of the ground onscreen (in metres)
 ballStartPos = vector(-450, 300, 0) # starting position of the ball which will be in freefall (in metres)
-ballVel = vector(100, 0, 0) # starting velocity of the ball in m/s
+ballVel = vector(200, 0, 0) # starting velocity of the ball in m/s
 ballMass = 5 # the ball's mass in kg
 ballDragCoeff = 1.2 # drag coefficient of the ball
 ballNetForce = vector(0, 0, 0) # holds the net force of the ball
@@ -29,7 +27,7 @@ dt = 0.01 # deltaT variable used for calculations as it will be the difference i
 
 ballScene = display (x=0, y=0, width = 500, height = 500, autoscale = true, background=color.blue) # creates the window where our simulation will be shown
 ground = box(pos = groundStartPos, size = (800,20,200), material = materials.earth) # creates the ground with the earth texture, which the ball will fall towards
-ball = sphere(pos = ballStartPos, radius = 10, material = materials.marble) # creates the ball, which will fall towards the ground
+ball = sphere(pos = ballStartPos, radius = 10, material = materials.marble, make_trail = True) # creates the ball, which will fall towards the ground
 
 #Setup the acceleration and velocity arrows
 vArrow = arrow(pos=ball.pos, axis=ballVel, color=color.green)
@@ -59,12 +57,13 @@ while ball.pos.y >= 0:
 
     # Calculate ball's drag and net froces
     ballDrag = - ballDragCoeff * ballVel
-    ballNetForce.y = ballMass * gravity.y + ballDrag.y
-    print ballVel.x
+    #ballNetForce.y = ballMass * gravity.y + ballDrag.y # don't apply drag to x axis
+    ballNetForce = ballMass * gravity + ballDrag # apply drag to both x and y axis
 
     # calulcate ball velocity
     ballVel += ballNetForce * dt / ballMass
     ball.pos += ballVel * dt
+
 
     # Update vector arrows surrounding the ball
     vArrow.pos = ball.pos + (12, 0, 0) # offset position of the arrows so they do not appear inside the ball and on top of each other
@@ -87,3 +86,11 @@ while ball.pos.y >= 0:
 
     # increment the time
     t += dt
+
+# keep program running until user presses ESC key
+while True:
+    rate(30) # set refresh rate lower as there is no need for the program to run 100 times a second here
+    if ballScene.kb.keys: # wait for key event to be processed
+        key = ballScene.kb.getkey() # get last key to be to be pressed
+        if key == 'esc': # if the user pressed the escape key exit the program
+            exit()
