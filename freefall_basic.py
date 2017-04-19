@@ -89,3 +89,11 @@ while ball.pos.y >= 0:
 
 vFLabel.text = "Final Velocity: " + str(ballVel.y) + " m/s"
 pFLabel.text = "Final Position: " + str(ball.pos.y) + " m"
+
+# keep program running until user presses ESC key
+while True:
+    rate(30) # set refresh rate lower as there is no need for the program to run 100 times a second here
+    if ballScene.kb.keys: # wait for key event to be processed
+        key = ballScene.kb.getkey() # get last key to be to be pressed
+        if key == 'esc': # if the user pressed the escape key exit the program
+            exit()
