@@ -3,7 +3,7 @@
 # VPython Imports
 from visual import *
 from visual.graph import *
-
+from extras import *
 # Modify these variables to change properties of the simulation:
                  # x, y, z
 gravity = vector(0, -9.8, 0) # vector objects provide some extra functionality that is useful for physics simulations. (m/s/s)
@@ -50,20 +50,12 @@ dataWindow = display(x=0, y = 600, width = 1100, height = 150,
 liveMotionData = label(yoffset = 15, xoffset = -110, line = 0)
 liveForceData = label(yoffset = 15, xoffset = 110, line = 0)
 
-# Function to handle exiting the simulation
-
-def exitOnKeyPress(): # exits the simulation when the user presses the escape key
-    if ballScene.kb.keys: # wait for key event to be processed
-        key = ballScene.kb.getkey() # get last key to be to be pressed
-        if key == 'esc': # if the user pressed the escape key exit the program
-            exit()
-
 # simulation loop
 
 while ball.pos.y >= 0:
     rate(100) # set loop to run 100 times a second
     
-    exitOnKeyPress()
+    exitOnKeyPress(ballScene)
 
     # Calculate ball's drag and net froces
     ballDrag = - ballDragCoeff * ballVel
@@ -102,5 +94,5 @@ while ball.pos.y >= 0:
 # keep program running until user presses ESC key
 while True:
     rate(30) # set refresh rate lower as there is no need for the program to run 100 times a second here
-    exitOnKeyPress()
+    exitOnKeyPress(ballScene)
 
