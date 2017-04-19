@@ -3,7 +3,7 @@
 
 from visual import *
 from visual.graph import *
-
+from extras import *
 
 # Modify these variables to change properties of the simulation:
                  # x, y, z
@@ -56,6 +56,8 @@ liveForceData = label(yoffset = 15, xoffset = 110, line = 0)
 while ball.pos.y >= 0:
     rate(100) # set loop to run 100 times a second
 
+    exitOnKeyPress(ballScene)
+
     # Calculate ball's drag and net froces
     ballDrag = - ballDragCoeff * ballVel
     ballNetForce = ballMass * gravity + ballDrag
@@ -90,7 +92,4 @@ while ball.pos.y >= 0:
 # keep program running until user presses ESC key
 while True:
     rate(30) # set refresh rate lower as there is no need for the program to run 100 times a second here
-    if ballScene.kb.keys: # wait for key event to be processed
-        key = ballScene.kb.getkey() # get last key to be to be pressed
-        if key == 'esc': # if the user pressed the escape key exit the program
-            exit()
+    exitOnKeyPress(ballScene)
