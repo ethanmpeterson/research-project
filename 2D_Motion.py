@@ -16,7 +16,7 @@ ballMass = 5 # the ball's mass in kg
 ballDragCoeff = 1.2 # drag coefficient of the ball
 ballNetForce = vector(0, 0, 0) # holds the net force of the ball
 ballDrag = vector(0, 0, 0) # holds ball drag force
-
+ballMomentum = vector(0, 0, 0) # holds the momentum of the ball during the projectile motion
 
 # Time Related Constants
 
