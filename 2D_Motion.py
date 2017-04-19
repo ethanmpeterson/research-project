@@ -50,10 +50,20 @@ dataWindow = display(x=0, y = 600, width = 1100, height = 150,
 liveMotionData = label(yoffset = 15, xoffset = -110, line = 0)
 liveForceData = label(yoffset = 15, xoffset = 110, line = 0)
 
+# Function to handle exiting the simulation
+
+def exitOnKeyPress(): # exits the simulation when the user presses the escape key
+    if ballScene.kb.keys: # wait for key event to be processed
+        key = ballScene.kb.getkey() # get last key to be to be pressed
+        if key == 'esc': # if the user pressed the escape key exit the program
+            exit()
+
 # simulation loop
 
 while ball.pos.y >= 0:
     rate(100) # set loop to run 100 times a second
+    
+    exitOnKeyPress()
 
     # Calculate ball's drag and net froces
     ballDrag = - ballDragCoeff * ballVel
@@ -64,6 +74,8 @@ while ball.pos.y >= 0:
     ballVel += ballNetForce * dt / ballMass
     ball.pos += ballVel * dt
 
+    # Momentum Update
+    ballMomentum += ballNetForce * dt # n/s (newtons per second)
 
     # Update vector arrows surrounding the ball
     vArrow.pos = ball.pos + (12, 0, 0) # offset position of the arrows so they do not appear inside the ball and on top of each other
@@ -90,7 +102,5 @@ while ball.pos.y >= 0:
 # keep program running until user presses ESC key
 while True:
     rate(30) # set refresh rate lower as there is no need for the program to run 100 times a second here
-    if ballScene.kb.keys: # wait for key event to be processed
-        key = ballScene.kb.getkey() # get last key to be to be pressed
-        if key == 'esc': # if the user pressed the escape key exit the program
-            exit()
+    exitOnKeyPress()
+
