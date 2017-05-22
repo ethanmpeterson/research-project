@@ -10,7 +10,7 @@ from extras import *
 gravity = vector(0, -9.8, 0) # vector objects provide some extra functionality that is useful for physics simulations. (m/s/s)
 # See Documentation: http://vpython.org/contents/docs/vector.html
 
-groundStartPos = vector(0, -10, 0) # starting position of the ground onscreen (in metres)
+groundStartPos = vector(0, -100, 0) # starting position of the ground onscreen (in metres)
 ballStartPos = vector(0, 300, 0) # starting position of the ball which will be in freefall (in metres)
 ballVel = vector(0, 0, 0) # starting velocity of the ball in m/s
 ballMass = 5 # the ball's mass in kg
@@ -53,7 +53,7 @@ liveForceData = label(yoffset = 15, xoffset = 110, line = 0)
 
 # simulation loop
 
-while ball.pos.y >= 0:
+while ball.pos.y >= ground.pos.y:
     rate(100) # set loop to run 100 times a second
 
     exitOnKeyPress(ballScene)

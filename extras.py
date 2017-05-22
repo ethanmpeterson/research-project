@@ -12,3 +12,9 @@ def exitOnKeyPress(scene): # exits the simulation when the user presses the esca
         key = scene.kb.getkey() # get last key to be to be pressed
         if key == 'esc': # if the user pressed the escape key exit the program
             exit()
+
+def restart(scene):
+    if scene.kb.keys:
+        key = scene.kb.getkey()
+        if key == 'r':
+            print "r pressed"

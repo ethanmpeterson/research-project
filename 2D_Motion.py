@@ -11,9 +11,9 @@ gravity = vector(0, -9.8, 0) # vector objects provide some extra functionality t
 
 groundStartPos = vector(0, -10, 0) # starting position of the ground onscreen (in metres)
 ballStartPos = vector(-450, 300, 0) # starting position of the ball which will be in freefall (in metres)
-ballVel = vector(200, 0, 0) # starting velocity of the ball in m/s
+ballVel = vector(100, 10, 0) # starting velocity of the ball in m/s
 ballMass = 5 # the ball's mass in kg
-ballDragCoeff = 1.2 # drag coefficient of the ball
+ballDragCoeff = 0.6 # drag coefficient of the ball
 ballNetForce = vector(0, 0, 0) # holds the net force of the ball
 ballDrag = vector(0, 0, 0) # holds ball drag force
 ballMomentum = vector(0, 0, 0) # holds the momentum of the ball during the projectile motion
@@ -39,9 +39,18 @@ graphY = gdisplay(x=500, y=0, width=600, height=600, # setup graph display
             xtitle='Time (seconds)', ytitle='Magnitude',
             foreground=color.black, background=color.white)
 
-graphPos = gcurve(gdisplay = graphY, color = color.blue) # position will appear in blue on the graph
-graphVel = gcurve(gdisplay = graphY, color = color.green) # velocity will appear in green
-graphAcc = gcurve(gdisplay = graphY, color = color.red) # acceleration will appear in red
+graphX = gdisplay(x=500, y=0, width=600, height=600, # setup graph display
+            title='Horizontal Position(m), Velocity(m/s), and Acceleration(m/s/s)',
+            xtitle='Time (seconds)', ytitle='Magnitude',
+            foreground=color.black, background=color.white)
+
+graphPosY = gcurve(gdisplay = graphY, color = color.blue) # position will appear in blue on the graph
+graphVelY = gcurve(gdisplay = graphY, color = color.green) # velocity will appear in green
+graphAccY = gcurve(gdisplay = graphY, color = color.red) # acceleration will appear in red
+
+graphPosX = gcurve(gdisplay = graphX, color = color.blue) # position will appear in blue on the graph
+graphVelX = gcurve(gdisplay = graphX, color = color.green) # velocity will appear in green
+graphAccX = gcurve(gdisplay = graphX, color = color.red) # acceleration will appear in red
 
 # setup window for live data and additional information
 dataWindow = display(x=0, y = 600, width = 1100, height = 150,
@@ -52,9 +61,8 @@ liveForceData = label(yoffset = 15, xoffset = 110, line = 0)
 
 # simulation loop
 
-while ball.pos.y >= 0:
+while ball.pos.y >= ground.pos.y:
     rate(100) # set loop to run 100 times a second
-    
     exitOnKeyPress(ballScene)
 
     # Calculate ball's drag and net froces
@@ -75,10 +83,15 @@ while ball.pos.y >= 0:
     aArrow.pos = ball.pos + (-12, 0, 0) # ^
     aArrow.axis = 2 * ballNetForce / ballMass # multiply by 2 to make acceleration arrow more visible since it remanins constant
 
-    # Update Graphs
-    graphPos.plot(pos = (t, ball.pos.y))
-    graphVel.plot(pos = (t, ballVel.y))
-    graphAcc.plot(pos = (t, ballNetForce.y / ballMass))
+    # Update Y Graphs
+    graphPosY.plot(pos = (t, ball.pos.y))
+    graphVelY.plot(pos = (t, ballVel.y))
+    graphAccY.plot(pos = (t, ballNetForce.y / ballMass))
+
+    # Update X Graphs
+    graphPosX.plot(pos = (t, ball.pos.x))
+    graphVelX.plot(pos = (t, ballVel.x))
+    graphAccX.plot(pos = (t, ballNetForce.x / ballMass))
 
     # update data window
     liveMotionData.text = 'Velocity: ' + str(ballVel.y) + ' m/s \n' # gives ball's real time velocity
