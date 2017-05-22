@@ -47,10 +47,12 @@ graphX = gdisplay(x=500, y=0, width=600, height=600, # setup graph display
 graphPosY = gcurve(gdisplay = graphY, color = color.blue) # position will appear in blue on the graph
 graphVelY = gcurve(gdisplay = graphY, color = color.green) # velocity will appear in green
 graphAccY = gcurve(gdisplay = graphY, color = color.red) # acceleration will appear in red
+graphMomentumY = gcurve(gdisplay = graphY, color = color.black) # momentum will appear in orange
 
 graphPosX = gcurve(gdisplay = graphX, color = color.blue) # position will appear in blue on the graph
 graphVelX = gcurve(gdisplay = graphX, color = color.green) # velocity will appear in green
 graphAccX = gcurve(gdisplay = graphX, color = color.red) # acceleration will appear in red
+graphMomentumX = gcurve(gdisplay = graphX, color = color.black) # momentum will appear in orange
 
 # setup window for live data and additional information
 dataWindow = display(x=0, y = 600, width = 1100, height = 150,
@@ -88,11 +90,13 @@ while ball.pos.y >= ground.pos.y:
     graphPosY.plot(pos = (t, ball.pos.y))
     graphVelY.plot(pos = (t, ballVel.y))
     graphAccY.plot(pos = (t, ballNetForce.y / ballMass))
+    graphMomentumY.plot(pos = (t, ballMomentum.y))
 
     # Update X Graphs
     graphPosX.plot(pos = (t, ball.pos.x))
     graphVelX.plot(pos = (t, ballVel.x))
     graphAccX.plot(pos = (t, ballNetForce.x / ballMass))
+    graphMomentumX.plot(pos = (t, ballMomentum.x))
 
     # update data window
     liveMotionData.text = 'Y Velocity: ' + str(round(ballVel.y, 3)) + ' m/s \n' # gives ball's real time velocity
