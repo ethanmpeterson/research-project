@@ -58,6 +58,7 @@ dataWindow = display(x=0, y = 600, width = 1100, height = 150,
 
 liveMotionData = label(yoffset = 0, xoffset = -110, line = 0)
 liveForceData = label(yoffset = 15, xoffset = 110, line = 0)
+liveMomentumData = label(yoffset = 15, xoffset = 0, line = 0)
 
 # simulation loop
 
@@ -107,6 +108,9 @@ while ball.pos.y >= ground.pos.y:
 
     liveForceData.text += 'X Net Force: ' + str(round(ballNetForce.x, 3)) + ' N \n'
     liveForceData.text += 'X Drag Force: ' + str(round(ballDrag.x, 3)) + ' N'
+
+    liveMomentumData.text = 'Y Momentum: ' + str(round(ballMomentum.y, 3)) + ' N/s \n'
+    liveMomentumData.text += 'X Momentum: ' + str(round(ballMomentum.x)) + ' N/s'
 
     # increment the time
     t += dt
