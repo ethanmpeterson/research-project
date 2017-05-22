@@ -27,7 +27,7 @@ dt = 0.01 # deltaT variable used for calculations as it will be the difference i
 
 ballScene = display (x=0, y=0, width = 500, height = 500, autoscale = true, background=color.blue) # creates the window where our simulation will be shown
 ground = box(pos = groundStartPos, size = (800,20,200), material = materials.earth) # creates the ground with the earth texture, which the ball will fall towards
-ball = sphere(pos = ballStartPos, radius = 10, material = materials.marble, make_trail = True) # creates the ball, which will fall towards the ground
+ball = sphere(pos = ballStartPos, radius = 12, material = materials.marble, make_trail = True) # creates the ball, which will fall towards the ground
 
 #Setup the acceleration and velocity arrows
 vArrow = arrow(pos=ball.pos, axis=ballVel, color=color.green)
@@ -56,7 +56,7 @@ graphAccX = gcurve(gdisplay = graphX, color = color.red) # acceleration will app
 dataWindow = display(x=0, y = 600, width = 1100, height = 150,
                      box = 0, background = color.white, foreground = color.black)
 
-liveMotionData = label(yoffset = 15, xoffset = -110, line = 0)
+liveMotionData = label(yoffset = 0, xoffset = -110, line = 0)
 liveForceData = label(yoffset = 15, xoffset = 110, line = 0)
 
 # simulation loop
@@ -94,12 +94,19 @@ while ball.pos.y >= ground.pos.y:
     graphAccX.plot(pos = (t, ballNetForce.x / ballMass))
 
     # update data window
-    liveMotionData.text = 'Velocity: ' + str(ballVel.y) + ' m/s \n' # gives ball's real time velocity
-    liveMotionData.text += 'Position: ' + str(ball.pos.y) + ' m \n' # gives ball's current y pos
-    liveMotionData.text += 'Acceleration: ' + str(ballNetForce.y / ballMass) + ' m/s/s'
+    liveMotionData.text = 'Y Velocity: ' + str(round(ballVel.y, 3)) + ' m/s \n' # gives ball's real time velocity
+    liveMotionData.text += 'Y Position: ' + str(round(ball.pos.y, 3)) + ' m \n' # gives ball's current y pos
+    liveMotionData.text += 'Y Acceleration: ' + str(round((ballNetForce.y / ballMass), 3)) + ' m/s/s \n \n'
 
-    liveForceData.text = 'Net Force: ' + str(ballNetForce) + ' N \n'
-    liveForceData.text += 'Drag Force: ' + str(ballDrag) + ' N'
+    liveMotionData.text += 'X Velocity: ' + str(round(ballVel.x, 3)) + ' m/s \n' # gives ball's real time velocity
+    liveMotionData.text += 'X Position: ' + str(round(ball.pos.x, 3)) + ' m \n' # gives ball's current y pos
+    liveMotionData.text += 'X Acceleration: ' + str(round((ballNetForce.x / ballMass), 3)) + ' m/s/s'
+
+    liveForceData.text = 'Y Net Force: ' + str(round(ballNetForce.y, 3)) + ' N \n'
+    liveForceData.text += 'Y Drag Force: ' + str(round(ballDrag.y, 3)) + ' N \n \n'
+
+    liveForceData.text += 'X Net Force: ' + str(round(ballNetForce.x, 3)) + ' N \n'
+    liveForceData.text += 'X Drag Force: ' + str(round(ballDrag.x, 3)) + ' N'
 
     # increment the time
     t += dt
