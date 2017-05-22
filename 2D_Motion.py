@@ -67,6 +67,7 @@ liveMomentumData = label(yoffset = 15, xoffset = 0, line = 0)
 while ball.pos.y >= ground.pos.y:
     rate(100) # set loop to run 100 times a second
     exitOnKeyPress(ballScene)
+    #print(restart(ballScene))
 
     # Calculate ball's drag and net froces
     ballDrag = - ballDragCoeff * ballVel
@@ -123,4 +124,3 @@ while ball.pos.y >= ground.pos.y:
 while True:
     rate(30) # set refresh rate lower as there is no need for the program to run 100 times a second here
     exitOnKeyPress(ballScene)
-
