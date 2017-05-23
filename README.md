@@ -11,7 +11,12 @@ This repository contains several python files that contain physics simulations f
 
 ## Basic Freefall
 
+- Filename: freefall_basic.py
+
 ## Complex Freefall
+
+- Filename: freefall_complex.py
 
 ## 2 Dimensional Motion
 
+- Filename: 2D_Motion.py
