@@ -62,7 +62,7 @@ pFLabel.text = "Final Position:" # final position will be added after the loop f
 while ball.pos.y >= 0:
     rate(100) # set loop to run 100 times a second
 
-    exitOnKeyPress(ballScene)
+    keyPress(ballScene)
 
     ball.pos += ballVel * dt # just in case the user defined an initial velocity at the top of file or else this will increment by 0 doing nothing
 
@@ -95,4 +95,4 @@ pFLabel.text = "Final Position: " + str(ball.pos.y) + " m"
 # keep program running until user presses ESC key
 while True:
     rate(30) # set refresh rate lower as there is no need for the program to run 100 times a second here
-    exitOnKeyPress(ballScene)
+    keyPress(ballScene)

@@ -3,11 +3,8 @@
 # Ethan Peterson
 # April 19, 2017
 
-
-# Function to handle exiting the simulation
-
 # scene parameter takes scene object to properly close the window and detect key presses when that window is selected
-def exitOnKeyPress(scene): # exits the simulation when the user presses the escape key
+def keyPress(scene): # handles key press events in all simulations
     if scene.kb.keys: # wait for key event to be processed
         key = scene.kb.getkey() # get last key to be to be pressed
         if key == 'esc': # if the user pressed the escape key exit the program
@@ -17,6 +14,3 @@ def exitOnKeyPress(scene): # exits the simulation when the user presses the esca
                 ev = scene.waitfor('keydown')
                 if ev.key == 'p':
                     break
-                
-                
-
