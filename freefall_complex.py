@@ -18,6 +18,13 @@ ballDragCoeff = 1.2 # drag coefficient of the ball
 ballNetForce = vector(0, 0, 0) # holds the net force of the ball
 ballDrag = vector(0, 0, 0) # holds ball drag force
 
+originalBallPos = vector(0, 0, 0)
+originalBallVel = vector(0, 0, 0)
+
+originalBallPos = ballStartPos
+originalBallVel.x = ballVel.x
+originalBallVel.y = ballVel.y
+
 
 # Time Related Constants
 
@@ -50,6 +57,17 @@ dataWindow = display(x=0, y = 600, width = 1100, height = 150,
 
 liveMotionData = label(yoffset = 15, xoffset = -110, line = 0)
 liveForceData = label(yoffset = 15, xoffset = 110, line = 0)
+
+def restart():
+    ballNetForce = vector(0, 0, 0)
+    ballDrag = vector(0, 0, 0) 
+    ball.pos = originalBallPos
+    ballVel.x = originalBallVel.x
+    ballVel.y = originalBallVel.y
+    t = 0
+    
+
+ballScene.bind('click', restart)
 
 # simulation loop
 

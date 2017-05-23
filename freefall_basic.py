@@ -15,6 +15,13 @@ groundStartPos = vector(0, -10, 0) # starting position of the ground onscreen (i
 ballStartPos = vector(0, 300, 0) # starting position of the ball which will be in freefall (in metres)
 ballVel = vector(0, 0, 0) # starting velocity of the ball in m/s
 
+originalBallVel = vector(0, 0, 0)
+originalBallPos = vector(0, 0, 0)
+
+originalBallVel.x = ballVel.x
+originalBallVel.y = ballVel.y
+originalBallPos = ballStartPos
+
 # Time Related Constant Variables
 
 t = 0 # logs the total time the fall takes in seconds
@@ -57,6 +64,14 @@ pILabel = label(xoffset = 110, yoffset = 15, line = 0)
 pILabel.text = "Initial Position: " + str(ballStartPos.y) + " m"
 pFLabel = label(xoffset = 110, yoffset = -15, line = 0)
 pFLabel.text = "Final Position:" # final position will be added after the loop finishes
+
+def restart():
+    ball.pos = originalBallPos
+    ballVel.x = originalBallVel.x
+    ballVel.y = originalBallVel.y
+    
+ballScene.bind('click', restart)
+
 # simulation loop
 
 while ball.pos.y >= 0:

@@ -36,7 +36,7 @@ dt = 0.01 # deltaT variable used for calculations as it will be the difference i
 
 ballScene = display (x=0, y=0, width = 500, height = 500, autoscale = true, background=color.blue) # creates the window where our simulation will be shown
 ground = box(pos = groundStartPos, size = (800,20,200), material = materials.earth) # creates the ground with the earth texture, which the ball will fall towards
-ball = sphere(pos = ballStartPos, radius = 12, material = materials.marble, make_trail = True) # creates the ball, which will fall towards the ground
+ball = sphere(pos = ballStartPos, radius = 12, material = materials.marble, make_trail = True, retain = 90) # creates the ball, which will fall towards the ground
 
 #Setup the acceleration and velocity arrows
 vArrow = arrow(pos=ball.pos, axis=ballVel, color=color.green)
@@ -82,7 +82,6 @@ def restart():
     ballVel.y = originalBallVel.y
     ball.pos = originalBallPos
     t = 0
-
 
 
 ballScene.bind('click', restart) # restart function will be called when click is detected
