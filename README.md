@@ -25,4 +25,4 @@ Unlike the basic freefall simulation the complex freefall simulation assumes nor
 
 - Filename: 2D_Motion.py
 
-
+The 2D motion simulation resembles the complex freefall simulation except it handles complex motion in two directions. The simulation demonstrates the idea of 2 dimensional motion by allowing the user to analyze graph data from each axis. Users can change the same values as they could in the complex freefall simulation except they can use two dimensions where applicable.
