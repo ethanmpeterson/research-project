@@ -50,6 +50,7 @@ graphY = gcurve(gdisplay = graph, color = color.red) # Y-Pos will appear in red
 
 def updatePos(rightInMotion, time): # takes boolean indicating which pendulum starts in motion and the time elapsed to update the position
     theta = initAngle * numpy.cos((gravity.y/length) ** (0.5) * time) # Theta as a function of time taken from http://www.leonhostetler.com/blog/newtons-cradle-in-visual-python-201702/
+    # double ** symbol is raising to a power
     position = vector(length * numpy.sin(theta), -length * numpy.cos(theta), 0)
     if rightInMotion:
         balls[0].pos = position
