@@ -36,6 +36,12 @@ Fnet = Fg.x # net force is the x component of gravity
 a.x = Fnet / blockMass # calculate acceleration derived from formula Fnet = ma
 a.y = a.x * numpy.tan(theta) # use trig to inferr acceleration for y - dir since we defined coordinate system on angle
 print(a)
+
+# Define Energy Variables
+Ek = 0
+Eg = 0
+Eth = 0
+
 # Time Related Constants
 
 t = 0 # logs the total time the fall takes in seconds
@@ -43,12 +49,22 @@ dt = 0.01 # deltaT variable used for calculations as it will be the difference i
 
 # Setup Graphs
 
+graph = gdisplay(x=500, y=0, width=600, height=600, # setup graph display
+            title='Vertical Position(m), Velocity(m/s), and Acceleration(m/s/s)',
+            xtitle='Time (seconds)', ytitle='Magnitude',
+            foreground=color.black, background=color.white)
+
+graphEk = gcurve(gdisplay = graph, color = color.blue) # Ek will appear in blue on the graph
+graphEg = gcurve(gdisplay = graph, color = color.green) # Eg will appear in green
+graphEth = gcurve(gdisplay = graph, color = color.red) # Eth will appear in red
+
 # Setup Visuals
 scene = display (x=0, y=0, width = 500, height = 500, autoscale = true, background=color.black) # creates the window where our simulation will be shown
 block = box(pos = blockStartPos, size = (blockWidth, blockHeight, 0), material = materials.marble) # creates the ground with the earth texture, which the ball will fall towards
 base = cylinder(pos=(0, 0, 0), axis=(5,0,0), radius=0.1, color = color.white) # base
 slope = cylinder(pos=(0, 0, 0), axis=startPos, radius=0.1, color = color.white) # slope
-#ball = sphere(pos = ballStartPos, radius = 10, material = materials.marble) # creates the ball, which will fall towards the ground
+
+
 while True:
     rate(200)
     keyPress(scene)
@@ -57,7 +73,13 @@ while True:
         blockVel = blockVel + (a * dt)
         #blockVel.y = blockVel.y + (a.y * dt)
         block.pos.x += blockVel.x * dt
-        block.pos.y -= blockVel.y * dt 
+        block.pos.y -= blockVel.y * dt
+        # Calculate Energies
+        Ek = 0.5 * blockMass * (sqrt((blockVel.x ** 2) + (blockVel.y ** 2)) ** 2)
+        Eg = blockMass * gravity.y * block.pos.y
+        graphEk.plot(pos = (t, Ek))
+        graphEg.plot(pos = (t, Eg))
+        graphEth.plot(pos = (t, Eth))
     else: # handle second interval of time at the base of the slope where friction brings the block to a stop
         # calculate negative acceleration due to friction (friction is net force)
         a.y = 0
@@ -66,6 +88,13 @@ while True:
         if blockVel.x >= 0:
             blockVel = blockVel + (a * dt)
             block.pos.x += blockVel.x * dt
+            # Calculate Energies
+            Ek = 0.5 * blockMass * (blockVel.x ** 2)
+            Eg = 0
+            Eth = Fnet * block.pos.x
+            graphEk.plot(pos = (t, Ek))
+            graphEg.plot(pos = (t, Eg))
+            graphEth.plot(pos = (t, Eth))
         if blockVel.x <= 0:
             break
     t += dt
