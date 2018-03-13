@@ -26,6 +26,10 @@ blockStartPos = vector(startPos.x + (blockWidth / 2), startPos.y + (blockHeight 
 
 # use forces to calculate the acceleration down the ramp (resulting velocity will be used to update position and to calculate kinetic energy throughout the motion)
 
+Fg = vector((blockMass * gravity.y) * numpy.sin(theta), (blockMass * gravity.y) * numpy.cos(theta), blockMass * gravity.y) # z value will simply be overall magnitude of Fg
+Fnet = Fg.x
+a = Fnet / blockMass
+print(a)
 
 
 # Time Related Constants
