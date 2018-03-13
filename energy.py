@@ -51,7 +51,7 @@ dt = 0.01 # deltaT variable used for calculations as it will be the difference i
 
 graph = gdisplay(x=500, y=0, width=600, height=600, # setup graph display
             title='Ek, Eg, Eth',
-            xtitle='Time (seconds)', ytitle='Magnitude',
+            xtitle='Time (seconds)', ytitle='Magnitude (J)',
             foreground=color.black, background=color.white)
 
 graphEk = gcurve(gdisplay = graph, color = color.blue) # Ek will appear in blue on the graph
