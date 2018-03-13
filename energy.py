@@ -44,13 +44,14 @@ dt = 0.01 # deltaT variable used for calculations as it will be the difference i
 # Setup Graphs
 
 # Setup Visuals
-ballScene = display (x=0, y=0, width = 500, height = 500, autoscale = true, background=color.black) # creates the window where our simulation will be shown
+scene = display (x=0, y=0, width = 500, height = 500, autoscale = true, background=color.black) # creates the window where our simulation will be shown
 block = box(pos = blockStartPos, size = (blockWidth, blockHeight, 0), material = materials.marble) # creates the ground with the earth texture, which the ball will fall towards
 base = cylinder(pos=(0, 0, 0), axis=(5,0,0), radius=0.1, color = color.white) # base
 slope = cylinder(pos=(0, 0, 0), axis=startPos, radius=0.1, color = color.white) # slope
 #ball = sphere(pos = ballStartPos, radius = 10, material = materials.marble) # creates the ball, which will fall towards the ground
 while True:
     rate(200)
+    keyPress(scene)
     if block.pos.x < blockWidth / 2: # When block is sliding down the ramp
         # dt is such a small number that we are calculating the AROC on such a small interval that we are more or less getting instantaneous values (Calculus Application)
         blockVel = blockVel + (a * dt)
@@ -65,4 +66,10 @@ while True:
         if blockVel.x >= 0:
             blockVel = blockVel + (a * dt)
             block.pos.x += blockVel.x * dt
+        if blockVel.x <= 0:
+            break
     t += dt
+
+while True: # keep program running at slower speed without time incrimentation
+    rate(30)
+    keyPress(scene)
