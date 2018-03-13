@@ -23,13 +23,15 @@ startPos = vector(-length * numpy.cos(theta), length * numpy.sin(theta), 0)
 blockWidth = 1.0
 blockHeight = 0.5
 blockStartPos = vector(startPos.x + (blockWidth / 2), startPos.y + (blockHeight / 2), startPos.z)
+blockVel = vector(0, 0, 0) # initial velocity of the block (starts at rest)
 
 # use forces to calculate the acceleration down the ramp (resulting velocity will be used to update position and to calculate kinetic energy throughout the motion)
 
 Fg = vector((blockMass * gravity.y) * numpy.sin(theta), (blockMass * gravity.y) * numpy.cos(theta), blockMass * gravity.y) # z value will simply be overall magnitude of Fg
-Fnet = Fg.x
-a = Fnet / blockMass
-print(a)
+# coordinate system is on an angle of 25 degrees so we must use trig to get x and y components of Fg
+# multiplying Fg by sin of the angle for x comp and by cos for y comp
+Fnet = Fg.x # net force is the x component of gravity
+a = Fnet / blockMass # calculate acceleration derived from formula Fnet = ma
 
 
 # Time Related Constants
@@ -47,4 +49,9 @@ cylinder(pos=(0, 0, 0), axis=startPos, radius=0.1, color = color.white) # slope
 #ball = sphere(pos = ballStartPos, radius = 10, material = materials.marble) # creates the ball, which will fall towards the ground
 while True:
     rate(200)
+    if block.pos.x < 0: # When block is sliding down the ramp
+        blockVel.x = blockVel.x + (a * dt)
+        block.pos.x += blockVel.x * dt
+    else:
+        pass
     t += dt
