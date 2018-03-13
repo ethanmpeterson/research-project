@@ -2,7 +2,8 @@
 # Simulation of Problem 2 on our physics energy test (block slides down ramp friction brings it to a stop after reaching the bottom of the ramp)
 # The Block's Motion is broken up into the following events:
 # 1. Starts sliding down the ramp
-# 2. 
+# 2. reaches the bottom of the ramp
+# 3. Friction brings the block to a stop
 
 # Import Relevant Libraries
 from visual import * # VPython Libs
@@ -24,6 +25,7 @@ blockWidth = 1.0
 blockHeight = 0.5
 blockStartPos = vector(startPos.x + (blockWidth / 2), startPos.y + (blockHeight / 2), startPos.z)
 blockVel = vector(0, 0, 0) # initial velocity of the block (starts at rest)
+mu = 0.65 # coefficient of friction
 
 # use forces to calculate the acceleration down the ramp (resulting velocity will be used to update position and to calculate kinetic energy throughout the motion)
 a = vector(0,0,0)
@@ -32,8 +34,8 @@ Fg = vector((blockMass * gravity.y) * numpy.sin(theta), (blockMass * gravity.y) 
 # multiplying Fg by sin of the angle for x comp and by cos for y comp
 Fnet = Fg.x # net force is the x component of gravity
 a.x = Fnet / blockMass # calculate acceleration derived from formula Fnet = ma
-print(a)
 a.y = a.x * numpy.tan(theta) # use trig to inferr acceleration for y - dir since we defined coordinate system on angle
+print(a)
 # Time Related Constants
 
 t = 0 # logs the total time the fall takes in seconds
@@ -49,11 +51,18 @@ slope = cylinder(pos=(0, 0, 0), axis=startPos, radius=0.1, color = color.white) 
 #ball = sphere(pos = ballStartPos, radius = 10, material = materials.marble) # creates the ball, which will fall towards the ground
 while True:
     rate(200)
-    if block.pos.x < 0: # When block is sliding down the ramp
+    if block.pos.x < blockWidth / 2: # When block is sliding down the ramp
+        # dt is such a small number that we are calculating the AROC on such a small interval that we are more or less getting instantaneous values (Calculus Application)
         blockVel = blockVel + (a * dt)
         #blockVel.y = blockVel.y + (a.y * dt)
         block.pos.x += blockVel.x * dt
         block.pos.y -= blockVel.y * dt 
-    else:
-        pass
+    else: # handle second interval of time at the base of the slope where friction brings the block to a stop
+        # calculate negative acceleration due to friction (friction is net force)
+        a.y = 0
+        Fnet = mu * (gravity.y * blockMass)
+        a.x = -(Fnet / blockMass)
+        if blockVel.x >= 0:
+            blockVel = blockVel + (a * dt)
+            block.pos.x += blockVel.x * dt
     t += dt
