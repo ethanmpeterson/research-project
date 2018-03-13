@@ -50,7 +50,7 @@ dt = 0.01 # deltaT variable used for calculations as it will be the difference i
 # Setup Graphs
 
 graph = gdisplay(x=500, y=0, width=600, height=600, # setup graph display
-            title='Vertical Position(m), Velocity(m/s), and Acceleration(m/s/s)',
+            title='Ek, Eg, Eth',
             xtitle='Time (seconds)', ytitle='Magnitude',
             foreground=color.black, background=color.white)
 
