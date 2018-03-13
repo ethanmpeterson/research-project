@@ -9,6 +9,8 @@
 from visual import * # VPython Libs
 import numpy # NumPy lib for access to additional mathematical operations with python 
 # used in this case for sine and cosine functions
+from visual.graph import * # graphing libs
+from extras import * # misc extras that may be useful
 
 # Constants
 
@@ -17,6 +19,8 @@ gravity = vector(0, 9.8, 0) # vector objects provide some extra functionality th
 
 length = 10 # length of the pendulum string in m
 initAngle = 1.5 # The Initial angle of one of the pendulums in radians
+theta = 0
+
 diameter = 2 # the diameter of the balls attached to each pendulum
 position = vector(length * numpy.sin(initAngle), -length * numpy.cos(initAngle), 0)
 # Create the two pendulums
@@ -34,6 +38,16 @@ strings.append(cylinder(pos=(-diameter, 0, 0), axis=(balls[1].pos[0] + diameter,
 t = 0 # logs the total time the fall takes in seconds
 dt = 0.01 # deltaT variable used for calculations as it will be the difference in time between each time the loop runs
 
+# Set Up Graphs
+graph = gdisplay(x=500, y=0, width=600, height=600, # setup graph display
+            title='Theta (rad), X-Pos and Y-Pos',
+            xtitle='Time (seconds)', ytitle='Magnitude',
+            foreground=color.black, background=color.white)
+
+graphAngle = gcurve(gdisplay = graph, color = color.blue) # Theta value will appear in blue
+graphX = gcurve(gdisplay = graph, color = color.black) # X-Pos will appear in black
+graphY = gcurve(gdisplay = graph, color = color.red) # Y-Pos will appear in red
+
 def updatePos(rightInMotion, time): # takes boolean indicating which pendulum starts in motion and the time elapsed to update the position
     theta = initAngle * numpy.cos((gravity.y/length) ** (0.5) * time) # Theta as a function of time taken from http://www.leonhostetler.com/blog/newtons-cradle-in-visual-python-201702/
     position = vector(length * numpy.sin(theta), -length * numpy.cos(theta), 0)
@@ -42,8 +56,12 @@ def updatePos(rightInMotion, time): # takes boolean indicating which pendulum st
         strings[0].axis = position
     else:
         # 
-        balls[1].pos = [position.x - 2, position.y, position.z]
+        balls[1].pos = [position.x - diameter, position.y, position.z] # offset for diameter in x dir
         strings[1].axis = position
+    # Update Graphs
+    graphAngle.plot(pos = (t, theta))
+    graphX.plot(pos = (t, position.x)) # use pos variable so we are always graphing the ball in motion
+    graphY.plot(pos = (t, position.y))
     # switch pendulums when theta is 0 (add <= in if statement just in case it passes 0 between refreshes)
     if theta <= 0:
         return False
