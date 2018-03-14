@@ -66,7 +66,7 @@ slope = cylinder(pos=(0, 0, 0), axis=startPos, radius=0.1, color = color.white) 
 
 
 while True:
-    rate(200)
+    rate(100)
     keyPress(scene)
     if block.pos.x < blockWidth / 2: # When block is sliding down the ramp
         # dt is such a small number that we are calculating the AROC on such a small interval that we are more or less getting instantaneous values (Calculus Application)
