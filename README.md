@@ -37,4 +37,10 @@ The momentum simulation uses ideas from our momentum unit to model Newton's crad
 
 - Filename: energy.py
 
+The energy simulation covers ideas from our grade 12 energy unit modelling a specific problem from the unit test. It consists of a block sliding down a frictionless incline and coming to a stop due to the frictional surface at the bottom. The various types of energy are graphed aptly demonstrating the concept of conservation of energy.
 
+## Circular Motion
+
+- Filename: circular_motion.py
+
+The circular motion simulation covers ideas from the grade 12 circular motion unit. The simulation models the basic scenario of a mass attached to a string rotating in a circular motion. This is the same general scenerio students were asked to analyze in the project for that unit.
