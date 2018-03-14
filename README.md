@@ -26,3 +26,15 @@ Unlike the basic free fall simulation, the complex free fall simulation assumes 
 - Filename: 2D_Motion.py
 
 The 2D motion simulation resembles the complex free fall simulation, except that it handles complex motion in two directions. The simulation demonstrates the idea of 2 dimensional motion by allowing the user to analyze graph data from each axis. Users can change the same values as they could in the complex free fall simulation, with the exception that they can use two dimensions where applicable.
+
+## Momentum: Newton's Cradle
+
+- Filename: momentum.py
+
+The momentum simulation uses ideas from our momentum unit to model Newton's cradle. It is assumed that there is no loss of momentum or energy in each collision so the device continues forever transfering momentum from ball on a pendulum to another. Relevant data is also graphed creating the expected sinusoidal pattern. Constants like the initial angle and which pendulum to start with can be adjusted at the top of the file.
+
+## Energy
+
+- Filename: energy.py
+
+
