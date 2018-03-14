@@ -33,13 +33,13 @@ The 2D motion simulation resembles the complex free fall simulation, except that
 
 The momentum simulation uses ideas from our momentum unit to model Newton's cradle. It is assumed that there is no loss of momentum or energy in each collision so the device continues forever transfering momentum from ball on a pendulum to another. Relevant data is also graphed creating the expected sinusoidal pattern. Constants like the initial angle and which pendulum to start with can be adjusted at the top of the file.
 
+NOTE: Universal controls are not available in this simulation because it runs in an endless loop making them not applicable.
+
 ## Energy
 
 - Filename: energy.py
 
 The energy simulation covers ideas from our grade 12 energy unit modelling a specific problem from the unit test. It consists of a block sliding down a frictionless incline and coming to a stop due to the frictional surface at the bottom. The various types of energy are graphed aptly demonstrating the concept of conservation of energy.
-
-NOTE: Universal controls are not available in this simulation because it runs in an endless loop making them not applicable.
 
 ## Circular Motion
 
