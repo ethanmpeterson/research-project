@@ -12,40 +12,35 @@ from extras import * # misc extras that may be useful
 
 # Constants
 
-gravity = vector(0, 9.8, 0) # vector objects provide some extra functionality that is useful for physics simulations. (m/s/s)
-# See Documentation: http://vpython.org/contents/docs/vector.html
+g = 9.81 # gravity constant 
 
 length = 10 # length of the string in m
 theta = 0 # in Rad
 
 diameter = 2 # the diameter of the ball
-string = cylinder(pos=(0, 0, 0), axis=(0, -length, 0), radius=0.1)
+rod = cylinder(pos=(0, 0, 0), axis=(0, -length, 0), radius=0.1)
 ball = sphere(pos=(0, -length - 0.5 * diameter, 0), radius=0.5 * diameter, color=color.red)
-period = 1.0 # in seconds
 ballMass = 0.1 # in Kg
-ballW = vector(0, 0, 2 * pi / period) # since omega is equal to 2pi * 1/T
-ballVel = cross(ballW, string.axis) # velocity is the cross product of these two vectors
+# all calculations will be done in an angular coordinate system with omega and alpha and then converted back to linear values when the ball is animated onscreen
+omega = pi / 2 # initial angular velocity of the ball
+alpha = 0 # initial angular acceleration of the ball
+
 radius = length # radius of the circle formed by the motion of the ball
 
 # Time Related Constants
 
 t = 0 # logs the total time the fall takes in seconds
-dt = 0.01 # deltaT variable used for calculations as it will be the difference in time between each time the loop runs
+dt = 0.001 # deltaT variable used for calculations as it will be the difference in time between each time the loop runs
 
-while True:
-    rate(100)
-    # centripetal force is the net force
-    # the force is the triple scalar product of velocity omega and mass
-    Fnet = ballMass * cross(ballW, ballVel)
+while True: # Reference Simulation only ran for one period because it quickly degenerates
+    rate(1.0 / dt)
+    if theta > 2 * pi: # ensure theta always remains within range of 0 - 2pi
+        theta -= 2 * pi
 
-    # use Newton's Second law to determine acceleration
-    a = Fnet / ballMass
-
-    # Calculate resulting velocity
-    ballVel += a * dt
-
-    # update string axis allowing it to remain connected to the ball
-    string.axis = rotate(string.axis, angle=(mag(ballW) * dt))
-    ball.pos = string.axis
-
-    t += dt
+    alpha = - g * cos(theta) / radius # calculate 
+    omega += alpha * dt
+    theta += omega * dt
+    
+    ball.pos = (radius * cos(theta), radius * sin(theta), 0) # convert to linear coordinates and adjust ball pos
+    rod.axis = ball.pos
+    #t += dt
