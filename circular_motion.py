@@ -32,6 +32,16 @@ radius = length # radius of the circle formed by the motion of the ball
 t = 0 # logs the total time the fall takes in seconds
 dt = 0.001 # deltaT variable used for calculations as it will be the difference in time between each time the loop runs
 
+# Set Up Graphs
+graph = gdisplay(x=500, y=0, width=600, height=600, # setup graph display
+            title='Theta (rad), X-Pos and Y-Pos',
+            xtitle='Time (seconds)', ytitle='Magnitude',
+            foreground=color.black, background=color.white)
+
+graphAngle = gcurve(gdisplay = graph, color = color.blue) # Theta value will appear in blue
+graphX = gcurve(gdisplay = graph, color = color.black) # X-Pos will appear in black
+graphY = gcurve(gdisplay = graph, color = color.red) # Y-Pos will appear in red
+
 while True: # Reference Simulation only ran for one period because it quickly degenerates
     rate(1.0 / dt)
     if theta > 2 * pi: # ensure theta always remains within range of 0 - 2pi
