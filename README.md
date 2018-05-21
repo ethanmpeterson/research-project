@@ -45,6 +45,14 @@ The energy simulation covers ideas from our grade 12 energy unit modelling a spe
 
 - Filename: circular_motion.py
 
-The circular motion simulation covers ideas from the grade 12 circular motion unit. The simulation models the basic scenario of a mass attached to a string rotating in a circular motion. This is the same general scenerio students were asked to analyze in the project for that unit.
+The circular motion simulation covers ideas from the grade 12 circular motion unit and AP material. The simulation models the basic scenario of a mass attached to a string rotating in a circular motion. This is the same general scenerio students were asked to analyze in the project for that unit.
+
+NOTE: Universal controls are not available in this simulation because it runs in an endless loop making them not applicable.
+
+## Pendulum Motion
+
+- Filename: pendulum_motion.py
+
+The pendulum motion simulation is derived from the circular motion simulation with one change. The initial angular velocity is set to 0 allowing the ball to react to gravity alone, which creates a pendulum that runs forever.
 
 NOTE: Universal controls are not available in this simulation because it runs in an endless loop making them not applicable.
