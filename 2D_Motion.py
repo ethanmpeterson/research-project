@@ -89,7 +89,7 @@ ballScene.bind('click', restart) # restart function will be called when click is
 # simulation loop
 
 while ball.pos.y >= ground.pos.y:
-    rate(100) # set loop to run 100 times a second
+    rate(1.0 / dt) # set loop to run 100 times a second
     keyPress(ballScene)
     #print(restart(ballScene))
 

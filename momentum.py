@@ -71,6 +71,6 @@ def updatePos(rightInMotion, time): # takes boolean indicating which pendulum st
 
 rightInMotion = True # start with the right pendulum in motion
 while True:
-    rate(100)
+    rate(1.0 / dt)
     rightInMotion = updatePos(rightInMotion, t)
     t += dt
