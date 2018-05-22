@@ -34,13 +34,13 @@ dt = 0.001 # deltaT variable used for calculations as it will be the difference 
 
 # Set Up Graphs
 graph = gdisplay(x=500, y=0, width=600, height=600, # setup graph display
-            title='Theta (rad), X-Pos and Y-Pos',
+            title='Theta (rad), Omega and Alpha',
             xtitle='Time (seconds)', ytitle='Magnitude',
             foreground=color.black, background=color.white)
 
 graphAngle = gcurve(gdisplay = graph, color = color.blue) # Theta value will appear in blue
-graphX = gcurve(gdisplay = graph, color = color.black) # X-Pos will appear in black
-graphY = gcurve(gdisplay = graph, color = color.red) # Y-Pos will appear in red
+graphOmega = gcurve(gdisplay = graph, color = color.black) # Omega will appear in black
+graphAlpha = gcurve(gdisplay = graph, color = color.red) # Alpha will appear in red
 
 while True: # Reference Simulation only ran for one period because it quickly degenerates
     rate(1.0 / dt)
@@ -51,6 +51,11 @@ while True: # Reference Simulation only ran for one period because it quickly de
     omega += alpha * dt
     theta += omega * dt
     
+    # Update Graphs
+    graphAngle.plot(pos = (t, theta))
+    graphOmega.plot(pos = (t, omega))
+    graphAlpha.plot(pos = (t, alpha))
+
     ball.pos = (radius * cos(theta), radius * sin(theta), 0) # convert to linear coordinates and adjust ball pos
     rod.axis = ball.pos
-    #t += dt
+    t += dt
