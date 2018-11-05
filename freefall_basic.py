@@ -75,7 +75,7 @@ ballScene.bind('click', restart)
 # simulation loop
 
 while ball.pos.y >= 0:
-    rate(100) # set loop to run 100 times a second
+    rate(1.0 / dt) # set loop to run 100 times a second
 
     keyPress(ballScene)
 
